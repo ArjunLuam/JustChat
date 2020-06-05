@@ -52,7 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         //taking out his database
 
-        mUserdatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+        mUserdatabase= FirebaseDatabase.getInstance().getReference().child("User").child(current_uid);
         mUserdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,7 +73,10 @@ public class SettingsActivity extends AppCompatActivity {
         mstatusbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String status_val=mstatus.getText().toString();
+                //sending old status
                 Intent status_intent=new Intent(SettingsActivity.this,StatusActivity.class);
+                status_intent.putExtra("status_value",status_val);
                 startActivity(status_intent);
             }
         });

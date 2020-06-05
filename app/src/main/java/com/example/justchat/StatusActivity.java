@@ -23,7 +23,7 @@ public class StatusActivity extends AppCompatActivity {
     private Button mupdatebtn;
     private DatabaseReference mStatusdatabase;
     private FirebaseUser muser;
-    private LoadingDialogue loadingDialogue;
+    LoadingDialogue loadingDialogue;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,14 @@ public class StatusActivity extends AppCompatActivity {
         mtoolbar=findViewById(R.id.status_appbar);
         mupstatus=findViewById(R.id.status_update);
         mupdatebtn=findViewById(R.id.update_button);
+        loadingDialogue=new LoadingDialogue(StatusActivity.this);
+
+        String status_val=getIntent().getStringExtra("status_value");
+        mupstatus.setText(status_val);
         //Firebase
         muser= FirebaseAuth.getInstance().getCurrentUser();
         String current_uid=muser.getUid();
-        mStatusdatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+        mStatusdatabase= FirebaseDatabase.getInstance().getReference().child("User").child(current_uid);
 
         mupdatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
